@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10172b">
+  <meta name="description" content="Web Dev Day: sprint guiada de FastAPI, MVC e commits semânticos.">
+  <title>Web Dev Day — Sprint de desenvolvimento</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0c1220;--panel:#151f32;--panel2:#1a2940;--line:#30415a;--text:#ebf2fd;--muted:#adbed4;--mint:#7ee0bd;--sky:#83bafc;--amber:#ffd18a;--red:#ffa3a3;--purple:#d2b6ff;--radius:17px;}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    a{color:var(--sky)}a:hover{color:#d9eaff}button,input{font:inherit}button{cursor:pointer}code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace}code{font-size:.92em;background:#23334b;color:#dfecff;padding:.12rem .34rem;border-radius:5px}pre code{font-size:13px;background:none;padding:0;color:#d7e8ff}pre{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.55;margin:0}h1,h2,h3{line-height:1.22;letter-spacing:-.03em}h1{font-size:clamp(2.1rem,4vw,3.4rem);max-width:750px;margin:.7rem 0}h2{font-size:1.75rem;margin:0 0 .75rem}h3{font-size:1.15rem;margin:.3rem 0 .6rem}p{margin:.6rem 0 1rem}ul,ol{padding-left:1.35rem;margin:.6rem 0}li{margin:.25rem 0}strong{color:#fff}.shell{display:grid;grid-template-columns:260px minmax(0,1fr);max-width:1450px;margin:auto;min-height:100vh}.side{border-right:1px solid var(--line);background:#101a2b;padding:26px 20px;position:sticky;top:0;height:100vh;overflow-y:auto}.brand{font-size:1rem;font-weight:800;letter-spacing:.03em;color:#fff;display:flex;gap:10px;align-items:center}.mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#6ff0ca,#80aaff);color:#0c172b;display:grid;place-items:center;font-weight:900}.side small{color:var(--muted)}.nav-title{color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:10px;margin:28px 12px 12px}.side nav a{display:block;padding:9px 12px;border-radius:9px;text-decoration:none;color:#b9cadb;font-size:14px;margin:3px 0}.side nav a:hover,.side nav a:focus-visible{background:#243653;color:#fff}.side .info{margin-top:30px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}.side .info strong{font-size:14px}.side .info p{margin:5px 0 0;font-size:12px;color:var(--muted)}.main{min-width:0}.hero{padding:60px clamp(22px,5vw,72px) 48px;background:radial-gradient(ellipse at 95% 3%,#1d3e56 0,transparent 48%),linear-gradient(150deg,#111a2c,#15203a);border-bottom:1px solid var(--line)}.eyebrow{display:inline-flex;gap:8px;align-items:center;color:var(--mint);letter-spacing:.1em;font-weight:800;font-size:12px;text-transform:uppercase}.hero-sub{max-width:730px;color:#c3d2e6;font-size:17px}.pills{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}.pill{border:1px solid #50627b;background:#1b2d45;color:#dceafa;border-radius:20px;padding:4px 11px;font-size:12px;font-weight:700}.pill.highlight{color:var(--mint);border-color:#368e77}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.action{border:1px solid #4b6884;background:#223653;color:#f1f8ff;border-radius:10px;padding:9px 15px;font-weight:700;text-decoration:none}.action.primary{background:var(--mint);color:#102435;border-color:var(--mint)}.action:hover{filter:brightness(1.1)}.content{max-width:1030px;margin:auto;padding:0 clamp(20px,4.6vw,65px) 80px}.section{padding-top:48px;scroll-margin-top:22px}.section-lead{color:var(--muted);font-size:15px;max-width:780px}.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin:18px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.grid>.card{margin:0}.kpi{font-size:30px;color:#fff;font-weight:800;line-height:1.2}.caption{color:var(--muted);font-size:13px}.progress-track{height:9px;border-radius:12px;background:#28374e;overflow:hidden;margin:12px 0}.progress-track>div{height:100%;width:0;background:linear-gradient(90deg,var(--sky),var(--mint));transition:width .25s}.todo{display:flex;align-items:flex-start;gap:10px;padding:11px 0;border-top:1px solid #2a3a4e}.todo:first-of-type{border-top:0}.todo input{flex:none;margin-top:5px;width:18px;height:18px;accent-color:#76dabb}.todo span{flex:1}.todo small{display:block;color:var(--muted);font-size:12px}.ticket{background:#141e31;border:1px solid #3b4b61;border-radius:18px;margin:22px 0;overflow:hidden;scroll-margin-top:18px}.ticket-head{padding:21px 22px 18px;background:#1a293e;border-bottom:1px solid var(--line)}.ticket-top{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center}.ticket-id{font-size:12px;color:var(--muted);letter-spacing:.06em;font-weight:800}.tag{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border:1px solid}.tag.fix{color:var(--red);border-color:#ab5961;background:#3d2738}.tag.refactor{color:var(--purple);border-color:#776195;background:#332c48}.tag.feat{color:var(--mint);border-color:#3c886f;background:#183d39}.tag.docs{color:var(--amber);border-color:#997b4a;background:#393325}.ticket-head h3{font-size:1.4rem;margin:12px 0 7px}.ticket-head p{color:#c2d0e3;margin:0}.ticket-body{padding:22px}.meta{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:13px;margin-bottom:15px}.columns{display:grid;grid-template-columns:1fr 1fr;gap:22px}.columns h4{margin:0 0 8px;color:#e5f1ff}.code-box{border:1px solid #3e5570;border-radius:12px;overflow:hidden;margin:12px 0 17px;background:#0b1425}.codebar{display:flex;justify-content:space-between;align-items:center;padding:8px 13px;background:#1e3048;border-bottom:1px solid #3e5570;color:#bbcee1;font-size:12px}.copy{background:transparent;color:#b7d9ff;border:1px solid #466584;border-radius:7px;padding:3px 9px;font-size:12px}.copy:focus-visible,summary:focus-visible{outline:2px solid var(--mint);outline-offset:2px}.code-box pre{padding:16px}.hint{border:1px solid #3e5067;border-radius:11px;margin:10px 0;background:#16253a}.hint summary{padding:11px 14px;cursor:pointer;font-weight:700;color:#d9e6fb}.hint summary:hover{background:#24354e}.hint .hint-inner{padding:5px 14px 15px;border-top:1px solid #31445f;color:#cedbed}.analog{margin-top:13px;border-left:3px solid var(--sky);padding:9px 15px;background:#1c2d44;border-radius:0 10px 10px 0}.analog .code-box{margin:9px 0}.commit{border:1px dashed #618a90;padding:12px 14px;border-radius:9px;background:#132d32;margin-top:16px}.commit code{background:none;color:var(--mint);padding:0;word-break:break-word}.path{font-family:monospace;color:#d1e0ef;background:#1c2e46;border-radius:5px;padding:2px 5px}.timeline{display:grid;gap:9px}.slot{display:grid;grid-template-columns:75px 1fr auto;gap:14px;align-items:center;padding:12px 14px;border:1px solid #304762;border-radius:11px;background:#19283e}.slot time{color:var(--mint);font-weight:800;font-size:13px}.slot span{color:var(--muted);font-size:12px}.notice{border-left:3px solid var(--amber);background:#332c25;padding:13px 15px;border-radius:0 10px 10px 0;color:#f5e2c7;margin:16px 0}.diagram{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:16px 0}.diagram .node{padding:9px 11px;background:#263954;border:1px solid #527392;border-radius:10px;text-align:center;font-size:12px;font-weight:700}.diagram .arrow{color:var(--mint)}.deliver{margin-top:24px;padding:22px;border:1px solid #3d715c;background:#172f33;border-radius:16px}.deliver h3{margin-top:0}.muted{color:var(--muted)}.foot{margin-top:46px;border-top:1px solid var(--line);padding-top:23px;color:var(--muted);font-size:13px}.small-btn{border:1px solid #48627f;border-radius:8px;padding:5px 10px;color:#d3e4f5;background:#20324c}.count{font-variant-numeric:tabular-nums}.check-section{margin-top:12px}.check-section label{cursor:pointer}.route-list li{margin:6px 0}.skip-link{position:absolute;top:-80px;left:15px;z-index:999;padding:8px;background:#fff;color:#000}.skip-link:focus{top:8px}
+    @media(max-width:900px){.shell{grid-template-columns:1fr}.side{height:auto;position:relative;padding:13px 20px;border-right:0;border-bottom:1px solid var(--line)}.side nav{display:flex;overflow-x:auto;gap:5px;padding-bottom:2px}.side nav a{white-space:nowrap;font-size:12px}.side .info,.side .nav-title,.side small{display:none}.hero{padding-top:40px}.columns{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}@media(max-width:530px){.slot{grid-template-columns:1fr;gap:3px}.card,.ticket-body{padding:17px}.ticket-head{padding:17px}.diagram{display:grid;grid-template-columns:1fr}.diagram .arrow{text-align:center;transform:rotate(90deg)}.hero-sub{font-size:15px}}
+    @media print{body{background:#fff;color:#1b2938;font-size:11px}.shell{display:block}.side,.hero-actions,.copy,.small-btn{display:none!important}.hero{padding:18px;background:none;color:#0d1930}.hero-sub,.section-lead,.muted{color:#405166}.content{max-width:none;padding:0 18px}.section{padding-top:12px}.ticket,.card,.slot,.deliver{background:#fff;color:#1b2938;border-color:#adb8c5;break-inside:avoid}.ticket-head{background:#eee}.ticket-head p,.ticket-id{color:#45596d}.ticket h3,.ticket h4,strong{color:#152839}.section h2{color:#152839}details:not([open]) .hint-inner{display:block!important}details:not([open]) .hint-inner{padding:10px}summary{color:#152839!important}pre,code{color:#13243d!important;background:#eee!important}.code-box,.codebar{background:#f2f4f7;color:#253649}.tag{background:none!important;color:#20324a!important}.meta,.caption{color:#45596d}.foot{display:none}}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#inicio">Pular para conteúdo</a>
+  <div class="shell">
+    <aside class="side" aria-label="Navegação da aula">
+      <div class="brand"><span class="mark">&lt;/&gt;</span><span>WEB DEV DAY</span></div>
+      <small>Sprint 01 · Guia do participante</small>
+      <div class="nav-title">Navegação</div>
+      <nav>
+        <a href="#inicio">01 · Visão geral</a>
+        <a href="#preparacao">02 · Preparação</a>
+        <a href="#arquitetura">03 · Arquitetura</a>
+        <a href="#tickets">04 · Backlog da sprint</a>
+        <a href="#wdd-001">WDD-001 · Fix</a>
+        <a href="#wdd-002">WDD-002 · Refactor</a>
+        <a href="#wdd-003">WDD-003 · Feat</a>
+        <a href="#wdd-004">WDD-004 · Docs</a>
+        <a href="#entrega">05 · Entrega</a>
+      </nav>
+      <div class="info"><strong>Sua missão</strong><p>Trabalhar com autonomia: reproduzir problemas, implementar, testar, revisar alterações e versionar cada ticket.</p></div>
+    </aside>
+    <main class="main" id="inicio">
+      <header class="hero">
+        <div class="eyebrow">● Laboratório de engenharia de software · 3 horas</div>
+        <h1>Um dia na rotina de uma equipe de desenvolvimento web.</h1>
+        <p class="hero-sub">Você entrou na equipe responsável por uma API interna de chamados. O produto já existe. Sua tarefa é investigar um bug, melhorar a arquitetura, desenvolver um recurso e documentar a entrega — com commits semânticos de verdade.</p>
+        <div class="pills"><span class="pill">Python + FastAPI</span><span class="pill">GitHub Desktop</span><span class="pill">POO · MVC · TAD · DI</span><span class="pill highlight">4 tickets / 4 commits</span></div>
+        <div class="hero-actions"><a class="action primary" href="#preparacao">Começar preparação</a><a class="action" href="https://github.com/pixies0/web-dev-day" target="_blank" rel="noopener noreferrer">Repositório da sprint ↗</a></div>
+      </header>
+      <div class="content">
+        <section class="section" aria-labelledby="objetivo">
+          <h2 id="objetivo">Seu quadro de acompanhamento</h2>
+          <p class="section-lead">Marque as etapas apenas depois de executar e verificar cada resultado. A marcação é salva neste navegador; não é enviada ao professor.</p>
+          <div class="grid">
+            <div class="card"><div class="caption">Progresso da atividade</div><div class="kpi"><span id="progresso-num" class="count">0</span>%</div><div class="progress-track" role="progressbar" aria-label="Progresso da atividade" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="barra-progresso"><div id="progresso-barra"></div></div><div class="caption"><span id="itens-feitos">0</span> / <span id="itens-total">0</span> verificações concluídas</div></div>
+            <div class="card"><div class="caption">Critério de sucesso</div><div class="kpi">4 commits</div><p class="muted">Um commit para cada ticket: <code>fix</code>, <code>refactor</code>, <code>feat</code> e <code>docs</code>. Cada mudança deve ser pequena e verificável.</p></div>
+          </div>
+          <h3 style="margin-top:25px">Agenda de 180 minutos</h3>
+          <div class="timeline">
+            <div class="slot"><time>00–20</time><strong>Clonar, criar branch e ambiente</strong><span>20 min</span></div>
+            <div class="slot"><time>20–35</time><strong>Reconhecer endpoints e arquitetura</strong><span>15 min</span></div>
+            <div class="slot"><time>35–70</time><strong>WDD-001 · Investigar e corrigir</strong><span>35 min</span></div>
+            <div class="slot"><time>70–100</time><strong>WDD-002 · Refatorar sem alterar comportamento</strong><span>30 min</span></div>
+            <div class="slot"><time>100–145</time><strong>WDD-003 · Implementar nova funcionalidade</strong><span>45 min</span></div>
+            <div class="slot"><time>145–165</time><strong>WDD-004 · Documentar</strong><span>20 min</span></div>
+            <div class="slot"><time>165–180</time><strong>Testar, publicar e revisar histórico</strong><span>15 min</span></div>
+          </div>
+        </section>
+
+        <section class="section" id="preparacao" aria-labelledby="preparacao-titulo">
+          <h2 id="preparacao-titulo">Preparação da estação de trabalho</h2>
+          <p class="section-lead">O trabalho começa antes do primeiro código: verifique seu repositório, crie uma branch pessoal, isole dependências e execute a aplicação.</p>
+          <div class="card">
+            <h3>Etapa A — Clonar com GitHub Desktop</h3>
+            <ol class="route-list">
+              <li>Abra <a href="https://github.com/pixies0/web-dev-day" target="_blank" rel="noopener noreferrer">o repositório da equipe</a> e confirme que a base já foi publicada pelo instrutor.</li>
+              <li><strong>Se você não recebeu acesso de escrita:</strong> clique em <strong>Fork</strong> no GitHub, crie uma cópia na sua conta e depois clone <strong>a sua cópia</strong>. Isso permite publicar sem afetar o repositório original.</li>
+              <li>No <strong>GitHub Desktop</strong>: <strong>File → Clone repository → URL</strong>; cole o endereço do repositório original (se tiver acesso) ou o endereço do seu fork.</li>
+              <li>Escolha uma pasta local e clique em <strong>Clone</strong>. Abra o projeto no VS Code por <strong>Repository → Open in Visual Studio Code</strong> ou <strong>Open in your editor</strong>.</li>
+              <li>Em <strong>Current Branch → New Branch</strong>, partindo de <code>main</code>, crie <code>dev/seu-nome-sobrenome</code> (use letras minúsculas e hífens).</li>
+              <li>Confirme que a branch atual é a sua antes de começar as alterações. Publique com <strong>Publish branch</strong> quando estiver pronta.</li>
+            </ol>
+            <div class="notice"><strong>Atenção:</strong> clonar um repositório público não concede permissão para enviar commits ao original. Utilize um fork, caso não tenha sido adicionado como colaborador. Não faça commits diretamente na <code>main</code>.</div>
+            <div class="check-section"><label class="todo"><input type="checkbox" data-check="setup-clone"><span>Clonei o repositório correto e confirmei os arquivos no VS Code.</span></label><label class="todo"><input type="checkbox" data-check="setup-branch"><span>Criei e selecionei minha branch <code>dev/...</code>.</span></label></div>
+          </div>
+          <div class="card">
+            <h3>Etapa B — Criar ambiente virtual</h3>
+            <p>Abra um terminal no diretório raiz do projeto. No Windows, use um dos ambientes abaixo.</p>
+            <div class="code-box"><div class="codebar"><span>Opção 1 · PowerShell</span><button class="copy" type="button" data-copy="py -m venv .venv&#10;.\.venv\Scripts\Activate.ps1&#10;python -m pip install -r requirements.txt">Copiar</button></div><pre><code>py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt</code></pre></div>
+            <div class="code-box"><div class="codebar"><span>Opção 2 · Miniconda</span><button class="copy" type="button" data-copy="conda create -n web-dev-day python=3.13 -y&#10;conda activate web-dev-day&#10;python -m pip install -r requirements.txt">Copiar</button></div><pre><code>conda create -n web-dev-day python=3.13 -y
+conda activate web-dev-day
+python -m pip install -r requirements.txt</code></pre></div>
+            <details class="hint"><summary>Problemas frequentes ao ativar o ambiente</summary><div class="hint-inner">Se o PowerShell bloquear o script de ativação, abra <strong>cmd</strong> e use <code>.venv\Scripts\activate.bat</code>; ou use o Python do ambiente diretamente. Se <code>py</code> não existir, tente <code>python -m venv .venv</code>. Uma mensagem de módulo ausente geralmente indica que a instalação ocorreu em outro ambiente.</div></details>
+            <div class="check-section"><label class="todo"><input type="checkbox" data-check="setup-env"><span>O ambiente está ativo e as dependências foram instaladas.</span></label></div>
+          </div>
+          <div class="card">
+            <h3>Etapa C — Executar e explorar</h3>
+            <div class="code-box"><div class="codebar"><span>Terminal 1 · API</span><button class="copy" type="button" data-copy="python -m uvicorn app.main:app --reload">Copiar</button></div><pre><code>python -m uvicorn app.main:app --reload</code></pre></div>
+            <p>Acesse <a href="http://127.0.0.1:8000/docs" target="_blank" rel="noopener noreferrer">http://127.0.0.1:8000/docs</a> e use o botão <strong>Try it out</strong>. Em outro terminal com o mesmo ambiente ativo, execute os testes:</p>
+            <div class="code-box"><div class="codebar"><span>Terminal 2 · Testes</span><button class="copy" type="button" data-copy="python -m pytest -q">Copiar</button></div><pre><code>python -m pytest -q</code></pre></div>
+            <p>Faça uma chamada a <code>GET /saude</code>, liste os chamados e envie um <code>POST /chamados</code> usando um JSON válido. Observe a resposta e o <em>status code</em>.</p>
+            <div class="check-section"><label class="todo"><input type="checkbox" data-check="setup-running"><span>A API iniciou e a documentação interativa foi aberta.</span></label><label class="todo"><input type="checkbox" data-check="setup-tests"><span>Os testes iniciais passaram e fiz pelo menos uma chamada HTTP.</span></label></div>
+          </div>
+        </section>
+
+        <section class="section" id="arquitetura" aria-labelledby="arquitetura-titulo">
+          <h2 id="arquitetura-titulo">Mapa rápido da arquitetura</h2>
+          <p class="section-lead">O projeto adota uma organização inspirada em MVC: a interface HTTP atua como controladora; as entidades e schemas representam dados; o FastAPI também fornece a representação JSON e a documentação interativa. Serviços e repositórios complementam as camadas.</p>
+          <div class="diagram" aria-label="Fluxo da requisição"><span class="node">Cliente / Swagger<br><small>requisição HTTP</small></span><span class="arrow">→</span><span class="node">Controller<br><small>rotas HTTP</small></span><span class="arrow">→</span><span class="node">Service<br><small>regras de negócio</small></span><span class="arrow">→</span><span class="node">TAD / Repositório<br><small>acesso a dados</small></span></div>
+          <div class="grid">
+            <div class="card"><h3>MVC adaptado a uma API</h3><p><strong>Model:</strong> <span class="path">app/dominio</span> e <span class="path">app/modelos</span>. <strong>Controller:</strong> <span class="path">app/controladores</span>. <strong>View:</strong> nesta API, a representação JSON produzida pelo FastAPI, não uma página de templates. Não é MVC clássico de interface HTML.</p></div>
+            <div class="card"><h3>Complementos de arquitetura</h3><p><strong>Service:</strong> <span class="path">app/servicos</span>. <strong>TAD:</strong> contrato <span class="path">app/repositorios/contrato.py</span>. <strong>Implementação concreta:</strong> <span class="path">app/repositorios/memoria.py</span>. <strong>DI:</strong> <span class="path">app/dependencias.py</span>.</p></div>
+          </div>
+          <details class="hint"><summary>Exemplo semelhante: como outro sistema separaria camadas?</summary><div class="hint-inner"><p>Imagine uma API de <strong>livros</strong>, não de chamados. O controlador recebe <code>GET /livros</code>, pede uma listagem ao serviço, e o serviço consulta um repositório. Uma implementação de repositório poderia ler uma lista; outra poderia ler o PostgreSQL. O serviço conversa com a mesma interface nos dois casos.</p><div class="code-box"><div class="codebar"><span>Exemplo independente · biblioteca</span></div><pre><code>from abc import ABC, abstractmethod
+
+class RepositorioLivros(ABC):
+    @abstractmethod
+    def listar(self): ...
+
+class ServicoLivros:
+    def __init__(self, repositorio: RepositorioLivros):
+        self.repositorio = repositorio
+
+    def listar_disponiveis(self):
+        return [livro for livro in self.repositorio.listar()
+                if livro.disponivel]</code></pre></div><p>A interface abstrata descreve operações; a classe concreta fornece os detalhes. O objeto é fornecido ao serviço pelo código que monta as dependências.</p></div></details>
+          <div class="check-section"><label class="todo"><input type="checkbox" data-check="arch-map"><span>Localizei no projeto o controller, o model, o service, o contrato abstrato e o repositório concreto.</span></label></div>
+        </section>
+
+        <section class="section" id="tickets" aria-labelledby="tickets-titulo">
+          <h2 id="tickets-titulo">Backlog da sprint · quatro tickets</h2>
+          <p class="section-lead">Trabalhe na ordem sugerida. Conclua um ticket antes de iniciar o próximo, execute testes e faça <strong>um commit específico</strong> para cada mudança. Não combine implementações diferentes no mesmo commit.</p>
+          <p class="notice"><strong>Convenção:</strong> o tipo aceito para refatoração é <code>refactor</code>. A abreviação <code>refac</code> não faz parte do padrão mais utilizado de Conventional Commits. Estrutura: <code>tipo(escopo): descrição no imperativo</code>.</p>
+        </section>
+
+        <article class="ticket" id="wdd-001">
+          <div class="ticket-head"><div class="ticket-top"><span class="ticket-id">WDD-001 · BUG REPORT</span><span class="tag fix">fix</span></div><h3>O filtro de chamados retorna registros incorretos</h3><p>O suporte informa que, ao selecionar um status, a API apresenta chamados que não pertencem à seleção.</p></div>
+          <div class="ticket-body"><div class="meta"><span>Prioridade: alta</span><span>Esforço sugerido: 35 min</span><span>Áreas: service · testes</span></div>
+            <div class="columns"><div><h4>Investigue</h4><ol><li>Execute <code>GET /chamados</code> e anote os status existentes.</li><li>Compare com <code>GET /chamados?status_filtro=aberto</code>.</li><li>Procure o método responsável pela filtragem. Em qual camada ele deve ficar?</li><li>Antes de alterar o código, descreva a condição correta em português.</li><li>Corrija o defeito e crie um teste de regressão.</li></ol></div><div><h4>Critérios de aceite</h4><ul><li>Sem filtro, retorna todos os chamados.</li><li>Com filtro, retorna <strong>somente</strong> o status solicitado.</li><li>Um filtro sem correspondências retorna lista vazia.</li><li>O teste automatizado demonstra o comportamento correto.</li><li>As outras operações continuam funcionais.</li></ul></div></div>
+            <details class="hint"><summary>Dica 1 · Por onde começar?</summary><div class="hint-inner">Comece comparando a entrada do controller com o argumento recebido pelo service. Depois localize a expressão que escolhe os itens da listagem. Uma condição booleana pode produzir o conjunto oposto do esperado.</div></details>
+            <details class="hint"><summary>Dica 2 · Exemplo parecido (catálogo de livros)</summary><div class="hint-inner"><p>Imagine que uma biblioteca deseja consultar apenas livros da categoria solicitada. Primeiro reproduza o resultado com uma pequena lista e escreva uma asserção.</p><div class="code-box"><div class="codebar"><span>Exemplo independente · filtro por categoria</span></div><pre><code>livros = [
+    {"categoria": "ficcao", "titulo": "Livro A"},
+    {"categoria": "historia", "titulo": "Livro B"},
+]
+esperados = [item for item in livros
+             if item["categoria"] == "ficcao"]
+assert len(esperados) == 1</code></pre></div></div></details>
+            <div class="commit"><strong>Commit ao concluir:</strong> <code>fix(chamados): corrigir filtro por status</code></div>
+            <div class="check-section"><label class="todo"><input type="checkbox" data-check="fix-reproduce"><span>Reproduzi o problema antes de corrigir.</span></label><label class="todo"><input type="checkbox" data-check="fix-test"><span>Corrigi, testei casos com e sem filtro e rodei <code>pytest</code>.</span></label><label class="todo"><input type="checkbox" data-check="fix-commit"><span>Revisei o diff no GitHub Desktop e registrei o commit <code>fix</code>.</span></label></div>
+          </div>
+        </article>
+
+        <article class="ticket" id="wdd-002">
+          <div class="ticket-head"><div class="ticket-top"><span class="ticket-id">WDD-002 · TECH DEBT</span><span class="tag refactor">refactor</span></div><h3>Uma regra de tratamento de dados está na camada errada</h3><p>O time percebeu que o controller prepara textos antes de cadastrar chamados. Isso cria acoplamento entre HTTP e uma regra que também poderá ser usada por outras interfaces.</p></div>
+          <div class="ticket-body"><div class="meta"><span>Prioridade: média</span><span>Esforço sugerido: 30 min</span><span>Áreas: controller · service</span></div>
+            <div class="columns"><div><h4>Seu trabalho</h4><ol><li>Localize o tratamento de espaços em <code>titulo</code>, <code>descricao</code> e <code>solicitante</code> no cadastro.</li><li>Decida por que essa transformação pertence ao serviço.</li><li>Faça o controller apenas receber a requisição e delegar a criação.</li><li>Mantenha o comportamento anterior dos dados cadastrados.</li><li>Teste uma entrada com espaços nas extremidades.</li></ol></div><div><h4>Critérios de aceite</h4><ul><li>As três informações continuam sendo normalizadas.</li><li>A responsabilidade de normalizar dados está no serviço.</li><li>O controller fica mais simples e não modifica o objeto recebido.</li><li>Os testes iniciais continuam passando.</li><li>Nenhuma nova funcionalidade foi adicionada neste commit.</li></ul></div></div>
+            <details class="hint"><summary>Dica 1 · Como distinguir refatoração de funcionalidade?</summary><div class="hint-inner">Refatorar é reorganizar o código sem mudar o que o usuário observa. Execute um teste antes da alteração, faça a mudança e execute o mesmo teste novamente. Compare as respostas HTTP.</div></details>
+            <details class="hint"><summary>Dica 2 · Exemplo parecido (cadastro de clientes)</summary><div class="hint-inner"><p>Num cadastro de clientes, uma regra de formatação poderia inicialmente existir na rota. O ideal é que o serviço concentre essa regra, para que a API, uma CLI ou outra interface usem o mesmo comportamento.</p><div class="code-box"><div class="codebar"><span>Exemplo independente · serviço de clientes</span></div><pre><code>class ServicoClientes:
+    def __init__(self, repositorio):
+        self.repositorio = repositorio
+
+    def cadastrar(self, nome):
+        nome_limpo = nome.strip()
+        return self.repositorio.criar(nome_limpo)</code></pre></div></div></details>
+            <div class="commit"><strong>Commit ao concluir:</strong> <code>refactor(chamados): mover normalizacao para servico</code></div>
+            <div class="check-section"><label class="todo"><input type="checkbox" data-check="refactor-change"><span>Realizei a refatoração preservando o comportamento da API.</span></label><label class="todo"><input type="checkbox" data-check="refactor-test"><span>Confirmei normalização dos três campos e executei os testes.</span></label><label class="todo"><input type="checkbox" data-check="refactor-commit"><span>Registrei o commit <code>refactor</code> separadamente.</span></label></div>
+          </div>
+        </article>
+
+        <article class="ticket" id="wdd-003">
+          <div class="ticket-head"><div class="ticket-top"><span class="ticket-id">WDD-003 · USER STORY</span><span class="tag feat">feat</span></div><h3>Como atendente, quero concluir um chamado</h3><p>Quando a solicitação for atendida, preciso registrar sua conclusão para que ela deixe de aparecer como pendente.</p></div>
+          <div class="ticket-body"><div class="meta"><span>Prioridade: alta</span><span>Esforço sugerido: 45 min</span><span>Áreas: domínio · service · TAD · controller</span></div>
+            <div class="columns"><div><h4>Requisitos</h4><ol><li>Crie <code>PATCH /chamados/{chamado_id}/concluir</code>.</li><li>O endpoint não recebe corpo JSON.</li><li>Um chamado existente e não concluído passa ao status <code>concluido</code>.</li><li>Se não existir, responda <code>404</code>.</li><li>Se já estiver concluído, responda <code>409</code>.</li><li>O endpoint deve devolver o chamado atualizado.</li></ol></div><div><h4>Restrições arquiteturais</h4><ul><li>O domínio <code>Chamado</code> deve encapsular a ação de concluir em um método.</li><li>O serviço coordena o caso de uso e recebe um repositório por injeção.</li><li>Use o contrato abstrato existente; evite instanciar <code>RepositorioMemoria</code> no serviço.</li><li>A persistência passa pelo método <code>salvar</code> do repositório.</li><li>O controller traduz as situações em respostas HTTP.</li></ul></div></div>
+            <h4>Simule estes cenários no Swagger</h4>
+            <div class="code-box"><div class="codebar"><span>Comportamentos esperados · não é implementação</span></div><pre><code>PATCH /chamados/1/concluir  → 200, status "concluido"
+PATCH /chamados/1/concluir  → 409, já concluído
+PATCH /chamados/999/concluir → 404, não encontrado</code></pre></div>
+            <details class="hint"><summary>Dica 1 · Quem é responsável por quê?</summary><div class="hint-inner"><strong>Entidade:</strong> altera seu próprio estado de forma válida. <strong>Service:</strong> busca, aciona a entidade e solicita gravação. <strong>Repository:</strong> armazena sem conhecer HTTP. <strong>Controller:</strong> interpreta erros e define códigos de resposta. Confira os métodos já disponíveis no contrato do repositório.</div></details>
+            <details class="hint"><summary>Dica 2 · Exemplo parecido (empréstimo de livros)</summary><div class="hint-inner"><p>Um empréstimo deve poder ser devolvido somente uma vez. Observe como o próprio objeto pode proteger uma regra, sem precisar conhecer a rota HTTP.</p><div class="code-box"><div class="codebar"><span>Exemplo independente · domínio de biblioteca</span></div><pre><code>class Emprestimo:
+    def __init__(self):
+        self.devolvido = False
+
+    def devolver(self):
+        if self.devolvido:
+            raise ValueError("Livro já devolvido")
+        self.devolvido = True</code></pre></div><p>Como o serviço poderia buscar um empréstimo, chamar <code>devolver()</code> e armazenar o resultado? Que resposta HTTP caberia a uma segunda devolução?</p></div></details>
+            <details class="hint"><summary>Dica 3 · Injeção de dependências em FastAPI (outro domínio)</summary><div class="hint-inner"><div class="code-box"><div class="codebar"><span>Exemplo independente · biblioteca</span></div><pre><code>from fastapi import Depends
+
+def obter_servico_livros():
+    return ServicoLivros(RepositorioLivrosMemoria())
+
+@router.get("/livros")
+def listar_livros(servico = Depends(obter_servico_livros)):
+    return servico.listar_disponiveis()</code></pre></div><p>Na aplicação da sprint, use a função de dependências já existente, que compartilha a instância de repositório durante a execução.</p></div></details>
+            <div class="commit"><strong>Commit ao concluir:</strong> <code>feat(chamados): permitir concluir chamados</code></div>
+            <div class="check-section"><label class="todo"><input type="checkbox" data-check="feat-domain"><span>Criei a mudança no domínio e coordenei a operação pelo serviço e repositório.</span></label><label class="todo"><input type="checkbox" data-check="feat-http"><span>Implementei a rota e verifiquei as respostas HTTP 200, 404 e 409.</span></label><label class="todo"><input type="checkbox" data-check="feat-test"><span>Escrevi testes para os cenários da funcionalidade e executei <code>pytest</code>.</span></label><label class="todo"><input type="checkbox" data-check="feat-commit"><span>Registrei o commit <code>feat</code> separadamente.</span></label></div>
+          </div>
+        </article>
+
+        <article class="ticket" id="wdd-004">
+          <div class="ticket-head"><div class="ticket-top"><span class="ticket-id">WDD-004 · DOCUMENTATION</span><span class="tag docs">docs</span></div><h3>Uma pessoa nova precisa conseguir executar o projeto</h3><p>A equipe pediu um README que explique rapidamente como instalar, executar, testar e entender a solução entregue.</p></div>
+          <div class="ticket-body"><div class="meta"><span>Prioridade: média</span><span>Esforço sugerido: 20 min</span><span>Área: README.md</span></div>
+            <div class="columns"><div><h4>O que documentar</h4><ol><li>Pré-requisitos e comandos de execução.</li><li>O que faz cada camada: Model, Controller, Service, Repository e DI.</li><li>Exemplo de requisição e resposta do novo <code>PATCH</code>.</li><li>Como executar testes e quais cenários são cobertos.</li><li>O que fica em memória e o que reinicia ao parar a API.</li></ol></div><div><h4>Critérios de aceite</h4><ul><li>O README está legível e organizado por seções.</li><li>Os caminhos e comandos refletem o projeto real.</li><li>Não há senhas, tokens ou arquivos de ambiente versionados.</li><li>A documentação corresponde às funcionalidades que você realmente implementou.</li><li>O commit altera apenas documentação.</li></ul></div></div>
+            <details class="hint"><summary>Dica · Exemplo semelhante de documentação (API de biblioteca)</summary><div class="hint-inner"><div class="code-box"><div class="codebar"><span>Exemplo independente · Markdown</span></div><pre><code>## Consultar livros disponíveis
+Método: GET
+Rota: /livros?disponivel=true
+Resposta: 200 OK
+
+## Executar testes
+python -m pytest -q</code></pre></div><p>Escreva para alguém que nunca abriu o projeto. Teste os passos apresentados no próprio README.</p></div></details>
+            <div class="commit"><strong>Commit ao concluir:</strong> <code>docs(readme): documentar arquitetura e conclusao</code></div>
+            <div class="check-section"><label class="todo"><input type="checkbox" data-check="docs-write"><span>Atualizei o README com execução, arquitetura, testes e novo endpoint.</span></label><label class="todo"><input type="checkbox" data-check="docs-commit"><span>Registrei o commit <code>docs</code> sem misturar código-fonte.</span></label></div>
+          </div>
+        </article>
+
+        <section class="section" id="entrega" aria-labelledby="entrega-titulo">
+          <h2 id="entrega-titulo">Entrega e revisão do sprint</h2>
+          <p class="section-lead">A última etapa reproduz uma prática de equipe: revisar o que mudou e submeter o trabalho para avaliação.</p>
+          <div class="card"><h3>Checklist final</h3>
+            <label class="todo"><input type="checkbox" data-check="end-history"><span>Na aba <strong>History</strong> do GitHub Desktop, verifiquei os quatro commits com mensagens semânticas e alterações correspondentes.</span></label>
+            <label class="todo"><input type="checkbox" data-check="end-tests"><span>Executei <code>python -m pytest -q</code> pela última vez e revisei <code>/docs</code>.</span></label>
+            <label class="todo"><input type="checkbox" data-check="end-push"><span>Cliquei em <strong>Push origin</strong> (ou <strong>Publish branch</strong>) e confirmei minha branch remota no GitHub.</span></label>
+            <label class="todo"><input type="checkbox" data-check="end-pr"><span>Abri um Pull Request para <code>pixies0/web-dev-day:main</code>, se autorizado, ou entreguei o link da minha branch ao instrutor.</span></label>
+            <div class="notice">Não é necessário mesclar sua branch na <code>main</code> para concluir o exercício. O instrutor analisará o código e o histórico de commits. Um PR pode ser usado apenas para revisão.</div>
+          </div>
+          <div class="deliver"><h3>Registro de entrega</h3><p>Prepare as informações abaixo para comunicar ao instrutor, como em uma atualização de sprint.</p><div class="code-box"><div class="codebar"><span>Modelo de comentário para a entrega</span><button class="copy" type="button" data-copy="Branch: dev/meu-nome\nLink: [URL da branch ou Pull Request]\nTestes: [resultado do pytest]\nTickets: WDD-001, WDD-002, WDD-003, WDD-004\nDificuldade principal: [descreva]">Copiar</button></div><pre><code>Branch: dev/meu-nome
+Link: [URL da branch ou Pull Request]
+Testes: [resultado do pytest]
+Tickets: WDD-001, WDD-002, WDD-003, WDD-004
+Dificuldade principal: [descreva]</code></pre></div></div>
+          <div class="card"><h3>Discussão rápida em equipe</h3><p>Qual foi a diferença entre corrigir um defeito e refatorar? Qual camada deveria saber que o status HTTP para um conflito é 409? Por que o serviço recebe um <em>contrato</em> de repositório em vez de depender de uma implementação PostgreSQL ou memória?</p><button class="small-btn" type="button" id="reset-progress">Limpar minhas marcações</button></div>
+          <div class="foot">Web Dev Day · material educacional · os exemplos de biblioteca ilustram ideias semelhantes, mas não entregam a implementação dos tickets. · <a href="https://fastapi.tiangolo.com/tutorial/dependencies/" target="_blank" rel="noopener noreferrer">FastAPI: Depends</a> · <a href="https://docs.github.com/en/desktop/making-changes-in-a-branch/managing-branches-in-github-desktop" target="_blank" rel="noopener noreferrer">GitHub Desktop: branches</a></div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <script>
+    (() => {
+      const storageKey = 'web-dev-day-sprint01-progress-v1';
+      const checks = Array.from(document.querySelectorAll('[data-check]'));
+      let completed = {};
+      try { completed = JSON.parse(localStorage.getItem(storageKey) || '{}') || {}; } catch (_error) { completed = {}; }
+      for (const checkbox of checks) checkbox.checked = completed[checkbox.dataset.check] === true;
+      const update = () => {
+        const done = checks.filter(x => x.checked).length;
+        const percent = Math.round((done / checks.length) * 100);
+        document.getElementById('progresso-num').textContent = String(percent);
+        document.getElementById('progresso-barra').style.width = percent + '%';
+        document.getElementById('barra-progresso').setAttribute('aria-valuenow', String(percent));
+        document.getElementById('itens-feitos').textContent = String(done);
+        document.getElementById('itens-total').textContent = String(checks.length);
+      };
+      for (const checkbox of checks) checkbox.addEventListener('change', () => {
+        completed[checkbox.dataset.check] = checkbox.checked;
+        try { localStorage.setItem(storageKey, JSON.stringify(completed)); } catch (_error) { /* Arquivo local ou armazenamento bloqueado. */ }
+        update();
+      });
+      update();
+      document.getElementById('reset-progress').addEventListener('click', () => {
+        if (!window.confirm('Apagar as marcações de progresso deste navegador?')) return;
+        completed = {};
+        for (const checkbox of checks) checkbox.checked = false;
+        try { localStorage.removeItem(storageKey); } catch (_error) { /* sem armazenamento */ }
+        update();
+      });
+      const fallbackCopy = (value) => {
+        const el = document.createElement('textarea'); el.value = value; el.style.position = 'fixed'; el.style.opacity = '0';
+        document.body.appendChild(el); el.focus(); el.select();
+        const ok = document.execCommand('copy'); el.remove(); return ok;
+      };
+      for (const button of document.querySelectorAll('[data-copy]')) button.addEventListener('click', async () => {
+        const value = button.dataset.copy.replaceAll('\\n', '\n');
+        let ok = false;
+        try {
+          if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(value); ok = true; }
+          else ok = fallbackCopy(value);
+        } catch (_error) { try { ok = fallbackCopy(value); } catch (_e) { ok = false; } }
+        const original = button.textContent; button.textContent = ok ? 'Copiado!' : 'Selecione e copie';
+        setTimeout(() => { button.textContent = original; }, 2200);
+      });
+    })();
+  </script>
+</body>
+</html>
