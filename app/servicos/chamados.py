@@ -10,7 +10,7 @@ class ServicoChamados:
     def listar(self, status: StatusChamado | None = None) -> list[Chamado]:
         chamados = self._repositorio.listar()
         if status is not None:
-            return [chamado for chamado in chamados if chamado.status != status]
+            return [chamado for chamado in chamados if chamado.status == status]
         return chamados
 
     def buscar_por_id(self, chamado_id: int) -> Chamado | None:

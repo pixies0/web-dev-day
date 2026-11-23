@@ -9,10 +9,10 @@ roteador_chamados = APIRouter(prefix="/chamados", tags=["Chamados"])
 
 @roteador_chamados.get("", response_model=list[ChamadoResposta])
 def listar_chamados(
-    status_filtro: StatusChamado | None = None,
+    status: StatusChamado | None = None,
     servico: ServicoChamados = Depends(obter_servico),
 ):
-    return servico.listar(status_filtro)
+    return servico.listar(status)
 
 @roteador_chamados.get("/{chamado_id}", response_model=ChamadoResposta)
 def buscar_chamado(
