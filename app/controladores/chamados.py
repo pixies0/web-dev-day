@@ -37,8 +37,9 @@ def criar_chamado(
     "/{chamado.id}/concluir", 
     response_model=ChamadoResposta
 )
-def concluir_chamado(
-    chamado_id:int, servico ServicoChamados = Depends(object)
+def concluir_chamado (
+    chamado_id:int, 
+    servico: ServicoChamados = Depends(object)
 ):
     try:
         chamado = servico.concluir(chamado_id)

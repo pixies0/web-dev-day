@@ -18,7 +18,6 @@ python -m uvicorn app.main:app --reload
 No Prompt de Comando (cmd), a ativação é `.venv\Scripts\activate.bat`.
 No Powershell (ps), a ativação é `.venv\Scripts\Activate.PSI`.
 
-
 Caso utilize Miniconda, você pode criar um ambiente com `conda create -n web-dev-day python=3.13 -y` e ativá-lo com `conda activate web-dev-day`, seguido de `python -m pip install -r requirements.txt`.
 
 Documentação automática da API: <http://127.0.0.1:8000/docs>
@@ -31,13 +30,14 @@ python -m pytest -q
 
 ## Endpoints disponíveis no projeto inicial
 
-| Método | Caminho | Descrição |
-|---|---|---|
-| GET | `/saude` | Estado da API |
-| GET | `/chamados` | Lista chamados |
-| GET | `/chamados?status_filtro=aberto` | Lista por status (investigue o comportamento) |
-| GET | `/chamados/{chamado_id}` | Busca um chamado |
-| POST | `/chamados` | Cadastra um chamado |
+| Método | Caminho                           | Descrição                                     |
+| ------ | --------------------------------- | --------------------------------------------- |
+| GET    | `/saude`                          | Estado da API                                 |
+| GET    | `/chamados`                       | Lista chamados                                |
+| GET    | `/chamados?status_filtro=aberto`  | Lista por status (investigue o comportamento) |
+| GET    | `/chamados/{chamado_id}`          | Busca um chamado                              |
+| POST   | `/chamados`                       | Cadastra um chamado                           |
+| PATCH  | `/chamados/{chamado.id}/concluir` | Concluir um chamado                           |
 
 Exemplo de POST:
 
