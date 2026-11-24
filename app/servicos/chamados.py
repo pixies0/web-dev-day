@@ -19,8 +19,8 @@ class ServicoChamados:
     def criar(self, dados: ChamadoCriacao) -> Chamado:
         chamado = Chamado(
             id=0,
-            titulo=dados.titulo,
-            descricao=dados.descricao,
-            solicitante=dados.solicitante,
+            titulo=dados.titulo.strip(),
+            descricao=dados.descricao.strip(),
+            solicitante=dados.solicitante.strip(),
         )
         return self._repositorio.criar(chamado)
