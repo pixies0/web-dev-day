@@ -4,6 +4,7 @@ from app.dependencias import obter_servico
 from app.dominio.chamado import StatusChamado
 from app.modelos.schemas import ChamadoCriacao, ChamadoResposta
 from app.servicos.chamados import ServicoChamados
+from app.dominio.excecoes import ChamadoJaConcluido
 
 roteador_chamados = APIRouter(prefix="/chamados", tags=["Chamados"])
 
@@ -30,3 +31,26 @@ def criar_chamado(
     # O controller faz uma transformação antes de encaminhar os dados.
 
     return servico.criar(dados)
+
+
+@roteador_chamados.patch(
+    "/{chamado.id}/concluir", 
+    response_model=ChamadoResposta
+)
+def concluir_chamado(
+    chamado_id:int, servico ServicoChamados = Depends(object)
+):
+    try:
+        chamado = servico.concluir(chamado_id)
+    except ChamadoJaConcluido as erro:
+        raise HTTPException(
+            status_code=409,
+            detail=str(erro)
+        ) from erro
+    if chamado is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Chamado não encontrado"
+        )
+    
+    return chamado  

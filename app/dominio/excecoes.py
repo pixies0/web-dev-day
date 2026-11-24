@@ -1,0 +1,2 @@
+class ChamadoJaConcluido(Exception):
+    pass

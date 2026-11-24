@@ -24,3 +24,11 @@ class ServicoChamados:
             solicitante=dados.solicitante.strip(),
         )
         return self._repositorio.criar(chamado)
+    def concluir(self, chamado_id: int) -> Chamado | None:
+        chamado = self._repositorio.buscar_por_id(chamado_id)
+
+        if chamado is None:
+            return None
+
+        chamado.concluir()
+
