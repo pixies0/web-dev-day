@@ -27,8 +27,4 @@ def buscar_chamado(
 def criar_chamado(
     dados: ChamadoCriacao, servico: ServicoChamados = Depends(obter_servico)
 ):
-    # O controller faz uma transformação antes de encaminhar os dados.
-    dados.titulo = dados.titulo.strip()
-    dados.descricao = dados.descricao.strip()
-    dados.solicitante = dados.solicitante.strip()
     return servico.criar(dados)

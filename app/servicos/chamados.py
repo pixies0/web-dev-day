@@ -17,10 +17,15 @@ class ServicoChamados:
         return self._repositorio.buscar_por_id(chamado_id)
 
     def criar(self, dados: ChamadoCriacao) -> Chamado:
+        # Regra de negócio: normalização de entrada (remoção de espaços em branco)
+        titulo = dados.titulo.strip()
+        descricao = dados.descricao.strip()
+        solicitante = dados.solicitante.strip()
+
         chamado = Chamado(
             id=0,
-            titulo=dados.titulo,
-            descricao=dados.descricao,
-            solicitante=dados.solicitante,
+            titulo=titulo,
+            descricao=descricao,
+            solicitante=solicitante,
         )
         return self._repositorio.criar(chamado)
