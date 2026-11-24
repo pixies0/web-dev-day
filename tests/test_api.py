@@ -86,3 +86,27 @@ def test_listagem_sem_filtro_retorna_todos(cliente):
     resposta = cliente.get("/chamados")
     assert resposta.status_code == 200
     assert len(resposta.json()) == 3
+
+
+def test_concluir_chamado_sucesso(cliente):
+    """PATCH /chamados/{id}/concluir - Concluir um chamado aberto com sucesso."""
+    # Usa o chamado ID 1 que está com status ABERTO
+    resposta = cliente.patch("/chamados/1/concluir")
+    assert resposta.status_code == 200
+    assert resposta.json()["id"] == 1
+    assert resposta.json()["status"] == "concluido"
+
+
+def test_concluir_chamado_inexistente(cliente):
+    """PATCH /chamados/{id}/concluir - Retorna 404 para ID inexistente."""
+    resposta = cliente.patch("/chamados/999/concluir")
+    assert resposta.status_code == 404
+    assert "não encontrado" in resposta.json()["detail"].lower()
+
+
+def test_concluir_chamado_ja_concluido(cliente):
+    """PATCH /chamados/{id}/concluir - Retorna 409 para chamado já concluído."""
+    # Usa o chamado ID 3 que já está com status CONCLUIDO
+    resposta = cliente.patch("/chamados/3/concluir")
+    assert resposta.status_code == 409
+    assert "já concluído" in resposta.json()["detail"].lower() or "ja concluido" in resposta.json()["detail"].lower()

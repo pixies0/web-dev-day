@@ -1,9 +1,9 @@
 """Controladores HTTP: recebem requisições e delegam casos de uso."""
 from fastapi import APIRouter, Depends, HTTPException, status
 from app.dependencias import obter_servico
-from app.dominio.chamado import StatusChamado
+from app.dominio.chamado import ChamadoJaConcluido, StatusChamado
 from app.modelos.schemas import ChamadoCriacao, ChamadoResposta
-from app.servicos.chamados import ServicoChamados
+from app.servicos.chamados import ChamadoNaoEncontrado, ServicoChamados
 
 roteador_chamados = APIRouter(prefix="/chamados", tags=["Chamados"])
 
@@ -28,3 +28,20 @@ def criar_chamado(
     dados: ChamadoCriacao, servico: ServicoChamados = Depends(obter_servico)
 ):
     return servico.criar(dados)
+
+@roteador_chamados.patch("/{chamado_id}/concluir", response_model=ChamadoResposta)
+def concluir_chamado(
+    chamado_id: int, servico: ServicoChamados = Depends(obter_servico)
+):
+    try:
+        return servico.concluir(chamado_id)
+    except ChamadoNaoEncontrado:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Chamado não encontrado"
+        )
+    except ChamadoJaConcluido:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="Chamado já concluído"
+        )
